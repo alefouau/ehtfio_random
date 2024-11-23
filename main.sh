@@ -13,13 +13,13 @@ main_br(){
     # select rand num from range
     [[ -z "${selc_branch}" ]] && selc_branch="$(awk -v s="$(rand_gen)" '{n=split($0,i," ");srand(s);x=int(1+rand()*n);print i[x]}' <<< "${branches[*]}")"
     # declare the config file
-    source <(curl -sL "https://raw.githubusercontent.com/fearocanity/ebtrfio-bot/${selc_branch}/config.conf")
+    source <(curl -sL "https://raw.githubusercontent.com/alefouau/ehtfio/${selc_branch}/config.conf")
     
     # makes it more random
     [[ -z "${seed}" ]] && seed="$(rand_gen)"
     
     # select frame by number
-    [[ -z "${all_f}" ]] && all_f="$(curl -sLk  -H "Authorization: Bearer ${git_tok}" "https://api.github.com/repos/fearocanity/ebtrfio-bot/git/trees/${selc_branch}?recursive=1")"
+    [[ -z "${all_f}" ]] && all_f="$(curl -sLk  -H "Authorization: Bearer ${git_tok}" "https://api.github.com/repos/alefouau/ehtfio/git/trees/${selc_branch}?recursive=1")"
     if [[ -z "${selc_frame}" ]]; then
         selc_frame="$(jq .tree[].path <<< "${all_f}" | sed -nE 's|.*/frame_(.*)\.jpg.*|\1|p' | awk -v s="${seed}" 'BEGIN{srand(s)}{++n;if(rand()<1/n)l=$0}END{print l}')"
     else
@@ -82,7 +82,7 @@ scrv3(){
                     print g
                 }
             }
-        }' <(curl -sL "https://raw.githubusercontent.com/fearocanity/ebtrfio-bot/${selc_branch}/${path_df}") | \
+        }' <(curl -sL "https://raw.githubusercontent.com/alefouau/ehtfio/${selc_branch}/${path_df}") | \
     awk '!a[$0]++{
             if ($0 ~ /^\[sig(n|ns)\]/) aa=aa $0 "\n"; else bb=bb $0 "\n"
         } END {
@@ -248,7 +248,7 @@ main_post(){
 		RNG seed: ${seed}
 		EOF
 		)"
-        curl -sL "https://raw.githubusercontent.com/fearocanity/ebtrfio-bot/${selc_branch}/frames/frame_${selc_frame}.jpg" -o main_frame.jpg
+        curl -sL "https://raw.githubusercontent.com/alefouau/ehtfio/${selc_branch}/frames/frame_${selc_frame}.jpg" -o main_frame.jpg
         cp main_frame.jpg main_frame_bak.jpg
         single=1
     else
@@ -279,7 +279,7 @@ main_post(){
     # random crop
     random_crop "main_frame.jpg"
     if [[ -n "${idxf}" ]]; then
-        curl -sfLX POST --retry 2 --retry-connrefused --retry-delay 7 "https://graph.facebook.com/v18.0/${idxf}/comments?access_token=${fb_tok}" -F "message=${msg_rc}" -F "source=@output_image.jpg" -o /dev/null
+        curl -sfLX POST --retry 2 --retry-connrefused --retry-delay 7 "https://graph.facebook.com/v21.0/${idxf}/comments?access_token=${fb_tok}" -F "message=${msg_rc}" -F "source=@output_image.jpg" -o /dev/null
         rm -f output_image.jpg
     fi
     if [[ "${single}" == 1 ]]; then
@@ -288,7 +288,7 @@ main_post(){
     
         # post subs
         if [[ -n "${subs_sign}" ]] || [[ -n "${subs_normal}" ]]; then
-            curl -sfLX POST --retry 2 --retry-connrefused --retry-delay 7 "https://graph.facebook.com/v18.0/${idxf}/comments?access_token=${fb_tok}" -F "message=Subs:" -F "source=@main_frame_bak.jpg" -o /dev/null
+            curl -sfLX POST --retry 2 --retry-connrefused --retry-delay 7 "https://graph.facebook.com/v21.0/${idxf}/comments?access_token=${fb_tok}" -F "message=Subs:" -F "source=@main_frame_bak.jpg" -o /dev/null
         fi
     fi
     rm -f main_frame.jpg main_frame_bak.jpg
