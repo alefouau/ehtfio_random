@@ -10,6 +10,7 @@ rand_gen(){
 }
 
 main_br(){
+    
     # select rand num from range
     [[ -z "${selc_branch}" ]] && selc_branch="$(awk -v s="$(rand_gen)" '{n=split($0,i," ");srand(s);x=int(1+rand()*n);print i[x]}' <<< "${branches[*]}")"
     # declare the config file
@@ -26,6 +27,7 @@ main_br(){
         selc_frame_old="${selc_frame}"
         selc_frame="$(( ${selc_frame%.*} + $(shuf -i 7-25 -n 1) ))"
     fi
+    echo ${selc_frame}
 }
 
 nth(){
@@ -133,7 +135,7 @@ add_propersubs(){
     fi
     [[ "${single}" == "1" ]] || unset subs_sign subs_normal
 }
-
+    echo ${1}
 two_panel(){
     for ((i=0;i<=1;i++)); do
         main_br
