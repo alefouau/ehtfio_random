@@ -18,16 +18,16 @@ main_br(){
     
     # makes it more random
     [[ -z "${seed}" ]] && seed="$(rand_gen)"
-    
+
+    selc_frame=$[ ( $RANDOM % ${total_frame} )  + 1 ]
     # select frame by number
-    [[ -z "${all_f}" ]] && all_f="$(curl -sLk  -H "Authorization: Bearer ${git_tok}" "https://api.github.com/repos/alefouau/ehtfio/git/trees/${selc_branch}?recursive=1")"
-    if [[ -z "${selc_frame}" ]]; then
-        selc_frame="$(jq .tree[].path <<< "${all_f}" | sed -nE 's|.*/frame_(.*)\.jpg.*|\1|p' | awk -v s="${seed}" 'BEGIN{srand(s)}{++n;if(rand()<1/n)l=$0}END{print l}')"
-	echo "$selc_frame"
-    else
-        selc_frame_old="${selc_frame}"
-        selc_frame="$(( ${selc_frame%.*} + $(shuf -i 7-25 -n 1) ))"
-    fi
+    #[[ -z "${all_f}" ]] && all_f="$(curl -sLk  -H "Authorization: Bearer ${git_tok}" "https://api.github.com/repos/alefouau/ehtfio/git/trees/${selc_branch}?recursive=1")"
+    #if [[ -z "${selc_frame}" ]]; then
+    #    selc_frame="$(jq .tree[].path <<< "${all_f}" | sed -nE 's|.*/frame_(.*)\.jpg.*|\1|p' | awk -v s="${seed}" 'BEGIN{srand(s)}{++n;if(rand()<1/n)l=$0}END{print l}')"
+    #else
+    #    selc_frame_old="${selc_frame}"
+    #    selc_frame="$(( ${selc_frame%.*} + $(shuf -i 7-25 -n 1) ))"
+    #fi
     
 }
 
