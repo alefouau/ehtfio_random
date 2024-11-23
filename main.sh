@@ -3,7 +3,7 @@
 git_tok="${1}"
 fb_tok="${2}"
 
-branches=('5082e093c2e1fd122b6ecb4d6deefa890e34d68b' '2ff97c5698984fd38069d0f3162da05549830e1a' '491c1cd111bd1ebec274e5a0be89abfebe716a22' '6638a7f8ad970b5cf6836f7d87912c1e7a7ae8da' '11ff7619bdafeb8dc922c2fb246a5bdd36c6a08f' '319adf0a3eb2dbec2aa925676854bbaeca207c9f' 'f8d55703f539389ebd78b225fca9da4568077a43' '5a7b322569b6d4b1681dbba5fd34dcf902c9b8db' 'af6aba8f2be0aeb1de1b735a4c5eb4a2448c5931' 'ca8446da0b8937c3f55fef1ed44e649f8390cbb7' '9b810c5253f7ed2ec80124a1f18e2b719fa241fa' 'c5240a03794a7fe6b8dad539d5ce65c4de3519fd')
+branches=('ep1')
 
 rand_gen(){
     od -vAn -N4 -tu4 < /dev/urandom | tr -d ' \n' | fold -w1 | shuf | tr -d ' \n'
