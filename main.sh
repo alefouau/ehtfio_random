@@ -3,7 +3,7 @@
 git_tok="${1}"
 fb_tok="${2}"
 
-branches=('ep1')
+branches=('ep1' 'ep2' 'ep3' 'ep4' 'ep5' 'ep6' 'ep7' 'ep8' 'ep9' 'ep10' 'ep11' 'ep12')
 
 rand_gen(){
     od -vAn -N4 -tu4 < /dev/urandom | tr -d ' \n' | fold -w1 | shuf | tr -d ' \n'
