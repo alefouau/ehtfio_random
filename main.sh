@@ -52,7 +52,8 @@ nth(){
 scrv3(){
     # This function solves the timings of Subs
     current_time="${1}"
-    path_df="$(jq -r .tree[].path <<< "${all_f}" | grep -E "fb/.*ep${episode#0*}.ass|fb/.*ep${episode#0*}_en.ass")"
+    #path_df="$(jq -r .tree[].path <<< "${all_f}" | grep -E "fb/.*ep${episode#0*}.ass|fb/.*ep${episode#0*}_en.ass")"
+    path_df="fb/subtitle_en.ass"
     subtitle="$(
     awk -F ',' -v curr_time_sc="${current_time}" '/Dialogue:/ {
             split(curr_time_sc, aa, ":");
