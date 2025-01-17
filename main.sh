@@ -143,7 +143,7 @@ two_panel(){
         main_br
         scrv3 "$(nth "${selc_frame}")"
         eval timestamp[${i}]="$(nth "${selc_frame}" timestamp)" 
-        curl -sL "https://raw.githubusercontent.com/fearocanity/ebtrfio-bot/${selc_branch}/frames/frame_${selc_frame}.jpg" -o main_frame_"${i}".jpg
+        curl -sL "https://raw.githubusercontent.com/alefouau/ehtfio/${selc_branch}/frames/frame_${selc_frame}.jpg" -o main_frame_"${i}".jpg
         add_propersubs "main_frame_${i}.jpg"
     done
     convert main_frame_* -append main_frame.jpg
